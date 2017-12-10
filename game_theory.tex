@@ -78,12 +78,13 @@
 \newcommand{\sign}{{\rm sign}}
 
 
+\usepackage{accents}
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
 
 
 
 
-
-\title{Game Theory}
+\title{The Early History of Game Theory}
 \author{Mikael Böörs}
 \affil{University of Gothenburg}
 \date{December 2017}
@@ -91,7 +92,10 @@
 \begin{document}
 
 \maketitle
+\thispagestyle{empty}
 \newpage
+\cleardoublepage
+\setcounter{page}{1}
 
 \section{Introduction}
 What is game theory? The modern definition of \emph{game theory} is
@@ -112,7 +116,7 @@ study of the optimal decision-making for a single agent.
     \item Examples of fields 
 \end{itemize}
 
-\section{The History of Game Theory}
+\section{The History of Game Theory}\label{The History of Game Theory}
 
 The field of game theory is quite young. In fact it was only established
 as a mathematical field in in the beginning of the 20th century with
@@ -208,6 +212,7 @@ in 1713 \citep{Fillion2015}. Waldegrave provided a minimax solution to
 the card game \emph{le Her}. The game is quite complex and I
 will not describe it here. Instead I refer the interested reader to
 the article by \cite{Fillion2015}. However a minimax strategy is a
+\mtodo{This is wrong.}
 strategy that minimizes the maximum loss in a game and maximizes the
 minimum gain. This concept was studied in detail in 1928 by John von
 Neumann who lay the foundation for the modern field of game theory.\\
@@ -255,8 +260,7 @@ There are several types of games and different representations of
 these games. In this section I will present a type of games called
 simultaneous \emph{strategic games} or \emph{normal-form
   games}. \textbf{Mention that these types of games are the original
-  types of games}. These games are arguably the simplest types of
-games and the word \emph{simultaneous} refers to the fact that all
+  types of games}. The word \emph{simultaneous} refers to the fact that all
 players make their move without knowing the moves of the other
 players. This can be thought of as a game where all players move at
 the same time and the combination of their moves determines their
@@ -276,18 +280,21 @@ theory.
   to player $P_i$. 
   \end{definition}
 
-\begin{definition} (Strategy) \label{Strategy}\\
+\begin{definition} (Pure Strategy) \label{Strategy}\\
   Let $P = \{P_1,...,P_n\}$ be a set of players in a game. For $P_i
-  \in P$ we define a \emph{strategy} $s_i$ as a mapping between each
-  game situation and an element in $A_i$. $S_i$ is the \emph{set of strategies} of player $i$.
+  \in P$ we define a \emph{pure strategy} $s_i$ as a mapping between each
+  game situation and an element in $A_i$. $S_i$ is the \emph{set of
+    pure strategies} of player $i$.
 \end{definition}
 
 In Definition~\ref{Set of actions}, an action should be though of as a
 legal move. Definition~\ref{Strategy} is more general than necessary
 when only considering strategic games that are only played once. The
-set of strategies of a player in such games could be considered
+set of pure strategies of a player in such games could be considered
 equivalent to the set of actions, However in iterative strategic games
-the distinction between an action and a strategy is important.  
+the distinction between an action and a pure strategy is
+important. If nothing else is mentioned, I will use the word
+\emph{strategies} to refer to pure strategies.   
 
 \begin{definition} (Strategy profile) \label{Strategy profile}\\
   Let $P = \{P_1,...,P_n\}$ be a set of players in a game. A
@@ -296,11 +303,31 @@ the distinction between an action and a strategy is important.
   S_i $ is the set of all strategy profiles.
 \end{definition}
 
+In the game examples presented in Section~\ref{The History of Game
+  Theory} the outcomes were states of the world such as \emph{A lot of
+food} or \emph{A small amount of food}. This is fine if all you want
+to do is to analyze a specific situation. However if you want to study
+abstract situations this will not do and this motivated John von
+Neumann and Oskar Morgenstern to develop their famous \emph{utility
+  theory} in the book \emph{Theory of Games and Economic Behavior} in
+1944. Because of page limitations I will not present the theory
+in detail but rather give an intuitive description of it and hope that
+it will suffice for the objective of this article. Their main idea was
+that given a set of outcomes $O = \{o_1,...,o_n\}$ it is sometimes
+possible to define a binary relation $\succsim$ over $O$ so that $o_i
+\succsim o_j$ is true if and only if the outcome $o_i$ is preferred over the
+outcome $o_j$ or if the outcomes are considered equally
+preferable. The symbol $\succ$ means that the preference relationship
+is strict. \citep{Maschler} This motivates Definition~\ref{Payoff}.
+
 \begin{definition} (Payoff) \label{Payoff}\\
-  Let $P = \{P_1,...,P_n\}$ a the set of players in a game. The
-  \emph{utility function} of player $i$ is a function $u : S
+  Let $P = \{P_1,...,P_n\}$ a the set of players in a game. Let $S$ be
+  a set of strategy profiles and $\succsim$ be a complete, reflexive
+  and transitive preference relation over $S$. The
+  \emph{utility function} of player $i$ is a function $u_i : S
   \rightarrow \mathbb{R}$ that maps a every strategy profile $s \in S$
-  to a \emph{payoff} $p \in \mathbb{R}$. $U = \{u_1,...,u_n\}$ is the
+  to a \emph{payoff} $p \in \mathbb{R}$ such that $s_k \succsim s_l
+  \Leftrightarrow u_i(s_k) \geq u_i(s_l)$. $U = \{u_1,...,u_n\}$ is the
   set of utility functions of player $1,...,n$.
 \end{definition}
 
@@ -314,11 +341,168 @@ define a strategic game.
   $(P,U,S)$. $G$ is an \emph{n-player strategic game}.  
 \end{definition}
 
+Strategic games with $n$ players with $|A_1| = m_1,...,|A_n| = m_n$
+are often denoted as a $m_1 \times .... \times m_n$-game and in the
+case where $n = 2$ the game is commonly represented as a $m_1 \times
+m_2$ bi-matrix as illustrated in Table~\ref{bi-matrix}.\\
+
+\begin{table}[h!]
+  \begin{center}
+    \setlength{\extrarowheight}{2pt}
+    \begin{tabular}{cc|c|c|c|}
+      & \multicolumn{2}{c}{} & \multicolumn{1}{c}{Player $2$} & \multicolumn{1}{c}{}\\
+      & \multicolumn{1}{c}{} & \multicolumn{1}{c}{$a_{21}$}  &
+                                                          \multicolumn{1}{c}{$a_{22}$} & \multicolumn{1}{c}{$a_{23}$} \\\cline{3-5}
+      \multirow{2}*{Player $1$}  & $a_{11}$ & $(a,b)$ & $(c,d)$ & $(e,f)$\\\cline{3-5}
+      & $a_{12}$ & $(g,h)$ & $(i,j)$ & $(k,l)$\\\cline{3-5}
+    \end{tabular}
+    \caption{An example of a $2 \times 3$ game represented as a $2
+      \times 3$ bi-matrix. The elements corresponds to the payoffs for
+      all strategy profiles. For example strategy profile
+      $(a_{12},a_{22})$ results in payoff $u_1(a_{12},a_{22}) = i$ for
+      player $1$ and payoff $u_2(a_{12},a_{22}) = j$ for player $2$.}
+    \label{bi-matrix}
+    \end{center}
+  \end{table}
+
+Let us return to the game \emph{Stag Hunt} again, but this time we can
+use von Neumann-Morgenstern utility theory to generalize the game to
+all situations with the same preference relationships. It seems
+reasonable to assume that Rousseau had the following preference
+relationships in mind: \emph{A lot of food} $\succ$ \emph{A small
+  amount of food} $\succ$ \emph{No food}. This means that we can
+represent the game as illustrated in Table~\ref{Stag Hunt 2}.Of course, there are other possible utility functions that would
+satisfy Definition~\ref{Payoff} and therefore there are several
+(infinite) many games of Stag Hunt. It is also always possible to
+apply a positive linear transformation to the payoffs in a game
+without changing the choices of strategies in the game. This is called
+\emph{strategic equivalence}. \\
+
+\begin{table}[h!]
+  \centering
+  \setlength{\extrarowheight}{2pt}
+  \begin{tabular}{cc|c|c|}
+    & \multicolumn{1}{c}{} & \multicolumn{2}{c}{Player 2}\\
+    & \multicolumn{1}{c}{} & \multicolumn{1}{c}{0}  &
+                                                              \multicolumn{1}{c}{1}
+    \\\cline{3-4}
+\multirow{2}*{Player 1}  & 0 & (1, 1) &
+                                                                   (-1,0) \\\cline{3-4}
+    & 1 & (0, -1) & (0,0) \\\cline{3-4}
+  \end{tabular}
+  \caption{Generalized version of Rousseaus Stag Hunt.}
+  \label{Stag Hunt 2}
+\end{table}
+
+I will now introduce the concept of \emph{zero-sum games}. Zero-sum
+games are arguably the simplest types of games and it was thees games
+that von Morgenstern studied in the beginning of the 20th century. A
+zero-sum game is a game $G$ such that the sum of the payoffs is zero
+for every strategy profile, or $G = (P,U,S)$ is a zero-sum game if $\forall s
+\in S~\sum_{i \in \{1,...,|P|\}} u_i(s) = 0$. An example pf a famous
+zero-sum game is the game of \emph{Rock, Paper, Scissors}. The game
+matrix is shown in Table~\ref{Rock Paper Scissors}.\\
+
+\begin{table}[h!]
+  \begin{center}
+    \setlength{\extrarowheight}{2pt}
+    \begin{tabular}{cc|c|c|c|}
+      & \multicolumn{2}{c}{} & \multicolumn{1}{c}{Player $2$} & \multicolumn{1}{c}{}\\
+      & \multicolumn{1}{c}{} & \multicolumn{1}{c}{Rock}  &
+                                                          \multicolumn{1}{c}{Paper} & \multicolumn{1}{c}{Scissors} \\\cline{3-5}
+      \multirow{2}*{Player $1$}  & Rock & $(0,0)$ & $(-1,1)$ & $(1,-1)$\\\cline{3-5}
+      & Paper & $(1,-1)$ & $(0,0)$ & $(-1,1)$\\\cline{3-5}
+           \multirow{1}*{}  & Scissors & $(-1,1)$ & $(1,-1)$ & $(0,0)$\\\cline{3-5}   \end{tabular}
+    \caption{An example of the $3\times 3$ zero-sum game \emph{Rock,
+        Paper, Scissors}.}
+    \label{Rock Paper Scissors}
+    \end{center}
+  \end{table}
+
+
+So far we have
+only considered representation of games, but what about solutions?
+Is there a best strategy and if so what is it? It was these types of
+questions that von Neumann thought about. Von Neumann, who only
+considered two player zero-sum games, reasoned that if
+a player is not guaranteed his highest payoff, the best thing he can
+do is try to maximize his minimum payoff. If for example player $1$
+chooses strategy $s_i \in S_1$, the worst payoff payoff the player can
+receive is given by $$min_{s \in S_2} u_1(s_i,s).$$ Remember that in
+zero-sum games, if player $2$ gets his maximum payoff, players $1$
+will get his minimum payoff. This fact makes it relevant to consider
+the minimizing expression above. A \emph{maxmin} strategy of player
+$1$ is a strategy given by $$argmax_{s_1 \in S_1} min_{s_2 \in S_2}
+u_1(s_1,s_2).$$ We define the \emph{maxmin value of player $1$} as
+$\ubar{v}_1 = max_{s_1 \in S_1} min_{s_2 \in S_2}u_1(s_1,s_2)$ and
+analogously we define the \emph{maxmin value of player $2$} as
+$\ubar{v}_2 = max_{s_2 \in S_2} min_{s_1 \in
+  S_1}u_2(s_1,s_2)$. However since $u_2 = -u_1$ in two player zero-sum
+games we have that $\ubar{v}_2 = -min_{s_2 \in S_2} max_{s_1 \in S_1}
+u_1(s_1,s_2)$. This motivates Definition~\ref{optimal strategy}.
+
+\begin{definition} (Optimal strategy)\label{optimal strategy}\\
+
+  Let $G = (P,U,S)$ be a two players zero-sum game and
+  let 
+\begin{equation}
+\begin{gathered}
+\ubar{v} = max_{s_1 \in S_1} min_{s_2 \in S_2}u_1(s_1,s_2) \\
+\bar{v} = min_{s_2 \in S_2} max_{s_1 \in S_1}u_1(s_1,s_2)
+\end{gathered}
+\end{equation} and
+   be the \emph{maxmin value} and the \emph{minmax value}
+of $G$. If $\ubar{v} = \bar{v} \triangleq V$ then $V$ is called the
+\emph{value} of $G$ and any strategies $s_1^* \in S_1$ and $s_2^* \in S_2$
+such that 
+\begin{equation}
+\begin{gathered}
+s_1^* = argmax_{s_1 \in S_1} min_{s_2 \in S_2}u_1(s_1,s_2) \\
+s_2^* = argmin_{s_2 \in S_2} max_{s_1 \in S_1}u_1(s_1,s_2)
+\end{gathered}
+\end{equation}
+are called \emph{optimal strategies} for player $1$ and
+$2$ respectively. \citep{Maschler}
+\end{definition}
+
+$\ubar{v}$ should be interpreted as the payoff that player $1$ can
+guarantee for himself and player $2$ is can guarantee himself that he
+never will have to pay more than $\bar{v}$. If a game has a value and
+$\ubar{v} = \bar{v}$ then the game has an equilibrium since neither
+player would want to defect from an optimal strategy profile. Does
+every two player zero-sum game have optimal strategies? The answer is
+no. Consider for example the game of rock, paper, scissors in
+Table~\ref{Rock Paper Scissors}. The maxmin value $\ubar{v} = -1$ but
+the minmax value $\bar{v} = 1$. Since $\ubar{v} \neq \bar{v}$ the game
+has no optimal pure strategies. In contrast, the game presented in
+Table~\ref{value game} does have a value and hence it also has optimal
+(pure) strategies. The value is $V = 1$ and the optimal strategies are
+$2$ for player $1$ and $3$ for player $2$. This means that player $1$
+can get at least $1$ in payoff and player $2$ can make sure that he
+will not have to pay more than $1$ in payoff. Therefore the game is in
+an equilibrium in the strategy profile $(2,3)$.
+
+\begin{table}[h!]
+  \begin{center}
+    \setlength{\extrarowheight}{2pt}
+    \begin{tabular}{cc|c|c|c|}
+      & \multicolumn{2}{c}{} & \multicolumn{1}{c}{Player $2$} & \multicolumn{1}{c}{}\\
+      & \multicolumn{1}{c}{} & \multicolumn{1}{c}{1}  &
+                                                          \multicolumn{1}{c}{2} & \multicolumn{1}{c}{3} \\\cline{3-5}
+      \multirow{2}*{Player $1$}  & 1 & $(3,-3)$ & $(-5,5)$ & $(-2,2)$\\\cline{3-5}
+      & 2 & $(1,-1)$ & $(4,-4)$ & $(1,-1)$\\\cline{3-5}
+           \multirow{1}*{}  & 3 & $(6,-6)$ & $(-3,3)$ & $(-5,5)$\\\cline{3-5}   \end{tabular}
+    \caption{An example of the $3\times 3$ zero-sum game with a pure
+      strategy solution in (2,3).}
+    \label{value game}
+    \end{center}
+  \end{table}
 
 \section{The Standard Games}
 
 \section{Other Types of Games}
 
+\newpage
 \printbibliography
 
 
