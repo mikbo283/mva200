@@ -1,0 +1,325 @@
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{authblk}
+\setlength\parindent{0pt}
+
+
+\usepackage{fullpage}
+\usepackage[natbib=true,citestyle=authoryear,backend=bibtex,useprefix]{biblatex}
+\addbibresource{library.bib}
+%\usepackage{natbib}
+\usepackage[dvips]{graphicx}
+\usepackage{lipsum}
+\usepackage[utf8]{inputenc} % Input encoding and font encoding
+%\usepackage[margin = 1in]{geometry} % Margins
+\usepackage{setspace} % Setting the spacing between lines
+\usepackage{amsthm, amsmath, amsfonts, mathtools, amssymb} % Math packages
+\usepackage{sgame, tikz} % Game theory packages
+\usepackage{pgf}
+\usetikzlibrary{trees, calc} % For extensive form games
+\usepackage{pgfplots}
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+\usepackage{multirow,array}
+%\usepackage[margin = 1in]{geometry} % Margins
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+\usetikzlibrary{positioning}
+\usepackage[mathscr]{euscript}
+\usepackage{enumitem}
+\usetikzlibrary{3d}
+\usetikzlibrary{calc,fadings,decorations.pathreplacing}
+\usepackage{bm,color}
+\usepackage{makecell}
+\usepackage{multicol}
+\usepackage{float}
+\restylefloat{table}
+\usepackage{stackengine}
+\usepackage{todonotes}
+\newcommand*{\mtodo}[1]{\todo[color=violet!50]{Mikael: #1}}
+\newcommand{\Mtodo}[1]{\todo[inline,color=violet!50]{Mikael: #1}}
+\usepackage{comment}
+\usepackage{caption}
+\usepackage[capitalize]{cleveref}
+\usepackage{times}
+\usetikzlibrary{arrows}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\graphicspath{{UsedPlots/}}
+
+% Theorems
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{examplex}[theorem]{Example}
+\newenvironment{example}
+  {\pushQED{\qed}\renewcommand{\qedsymbol}{$\diamondsuit$}\examplex}
+  {\popQED\endexamplex}
+
+\newtheorem{notation}[theorem]{Notation}  
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+  
+
+% To cite Rapoport et al.
+\newcommand{\citefirst}[1]{%
+  \AtNextCite{\defcounter{maxnames}{1}\defcounter{minnames}{1}}%
+  \citet{#1}%
+}
+
+
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\sign}{{\rm sign}}
+
+
+
+
+
+
+
+\title{Game Theory}
+\author{Mikael Böörs}
+\affil{University of Gothenburg}
+\date{December 2017}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\section{Introduction}
+What is game theory? The modern definition of \emph{game theory} is
+the study of strategic interaction between rational agents. In this
+context the word \emph{strategic} means that the actions of the agents
+in a game has an impact on the outcome of the game for themselves and
+for the other agents. It is also assumed that all agents, or \emph{players}, are aware of
+this fact. The term \emph{rational} means that the agents chooses the
+action that maximizes theirs expected utility, or in other words the
+action that they expect will lead to the subjectively best possible
+outcome based on the information available. The fact that the outcome
+does not depend on any single agent separates the field of game theory
+from the simpler field of decision theory which is the mathematical
+study of the optimal decision-making for a single agent. 
+
+\begin{itemize}
+    \item Difference between game theory and decision theory
+    \item Examples of fields 
+\end{itemize}
+
+\section{The History of Game Theory}
+
+The field of game theory is quite young. In fact it was only established
+as a mathematical field in in the beginning of the 20th century with
+the work of John von Neumann (1903-1957). However, game
+theoretical problems and questions regarding the optimal strategies in
+situations where the outcomes depend on the choices of many have been
+pondered throughout history by both philosophers, military
+strategists, political leaders and the common man. A famous example of
+a decision problem was stated by Blaise Pascal (1623-1662) and is
+commonly refereed to as \emph{Pascal's Wager}. The thought experiment
+was designed to motivate the rationality of believing in god and is
+formulated as follows. There are two possibilities: \emph{God exists}
+and \emph{God does not exist}. An individual has two choices:
+\emph{Believe in god} and \emph{Not believe in god}. If one believes
+in god and god exists the outcome will be endless happiness and if god
+does not exist the loss will be finite. If one does not believe in god
+and god exists the result will be eternal suffering, while the result
+will be finite happiness if god does not exist. The problem can be
+represented in a \emph{game matrix} as illustrated in Table~\ref{Pascal}.  
+
+
+\begin{table}[h!]
+  \centering
+  \setlength{\extrarowheight}{2pt}
+  \begin{tabular}{cc|c|c|}
+    & \multicolumn{1}{c}{} & \multicolumn{2}{c}{Nature}\\
+    & \multicolumn{1}{c}{} & \multicolumn{1}{c}{God exists}  &
+                                                              \multicolumn{1}{c}{$\neg$
+                                                               God exists}
+    \\\cline{3-4}
+\multirow{2}*{Human}  & Believe in god & Endless happiness & Finite loss \\\cline{3-4}
+    & $\neg$ Believe in god & Eternal suffering & Finite happiness \\\cline{3-4}
+  \end{tabular}
+  \caption{Pascal's Wager}
+  \label{Pascal}
+\end{table}
+
+Pascal argued that the expected happiness from believing in god was
+infinite while the expected outcome from not doing so was infinite
+suffering. Pascal's Wager has been the subject of much criticism, both
+from mathematicians and philosophers \textbf{Some of the critisism
+  will be mentioned in Section X}. Strictly speaking, Pascal's Wager is not a
+game theoretical problem since there is only one player and therefore it
+belongs to the field of decision theory. However the problem is a good
+example of an early attempt to analyse decision making. Another
+historical example of a thought experiment that actually is a game
+theoretical problem and which is still analyzed by game theorists to
+this day, is the famous game of \emph{Stag Hunt}. Stag Hunt was
+formulated by Jean-Jacques Rousseau (1712-1778) as a morality problem
+of social cooperation and the problem was formulated as a story of two
+hunters (in some versions there are several hunters but the addition
+of more players does not add anything interesting in this case). The
+two hunters sets out on a hunt and they can choose to hunt either stag
+or hare. There are plenty of hares so the hunters are confident that
+they can kill one on their own. However there are not as many stags
+and they believe that in order to kill a stag they must
+cooperate. Killing a stag will result in a lot of food while killing
+a hare will result in a smaller amount of food. Circumstances forces
+them to make the decision to hunt stag or hare without discussing with
+each other. Should they trust each other and hunt stag, or should they
+go for the safe alternative of hunting hare? Again, this game can be
+represented in a game matrix as illustrated in Table~\ref{Stag hunt 1}.\\ 
+
+\begin{table}[h!]
+  \centering
+  \setlength{\extrarowheight}{2pt}
+  \begin{tabular}{cc|c|c|}
+    & \multicolumn{1}{c}{} & \multicolumn{2}{c}{Hunter 2}\\
+    & \multicolumn{1}{c}{} & \multicolumn{1}{c}{Stag}  &
+                                                              \multicolumn{1}{c}{Hare}
+    \\\cline{3-4}
+\multirow{2}*{Hunter 1}  & Stag & (A lot of food, A lot of food) &
+                                                                   (A small amount
+                                        of food,
+                                                                   No food) \\\cline{3-4}
+    & Hare & (No food, A small amount
+                                        of food) & (A small amount
+                                        of food, A small amount
+                                        of food) \\\cline{3-4}
+  \end{tabular}
+  \caption{Stag Hunt}
+  \label{Stag hunt 1}
+\end{table}
+
+In contrast to Pascal's Wager, there is no obvious choice of action in
+this game, but \textbf{we will analyze it further in section X when we
+  have introduced the necessary game theoretical tools}.\\
+
+Both of the examples above are examples of game theoretical
+problems. However the first known strict solution to a game theoretical
+problem was provided by the armature matheamtician Francis Waldegrave
+in 1713 \citep{Fillion2015}. Waldegrave provided a minimax solution to
+the card game \emph{le Her}. The game is quite complex and I
+will not describe it here. Instead I refer the interested reader to
+the article by \cite{Fillion2015}. However a minimax strategy is a
+strategy that minimizes the maximum loss in a game and maximizes the
+minimum gain. This concept was studied in detail in 1928 by John von
+Neumann who lay the foundation for the modern field of game theory.\\
+
+In 1913 the German mathematician Ernst Zermelo (1971-1953) published
+the first theorem that can be considered as a game theoretical
+theorem. In the article \emph{Uber eine Anwendung der Mengenlehre auf die
+  Theorie des Schachspiels} Zermelo provides a theorem that states
+that in the game of chess, on of the three statements holds:
+\begin{itemize}
+\item White has a winning strategy
+\item Black has a winning strategy
+  \item Each of the two players has a strategy guaranteeing at least a
+    draw. \citep{Schwalbe2001}
+  \end{itemize}
+  A winning strategy is a strategy that always wins, regardless of the
+  opponents strategy and similarly a strategy that guarantees a draw
+  guarantees a draw regardless of the opponents strategy. We do not
+  know which of the statements that hold, but Zermelo tried to prove
+  that one of the statements must hold using backward
+  induction. However was only successful in part. The proof was
+  completed by the joint efforts of Dénes König (1884-1944) and László
+  Kalmár (1905-1976) in 1928 and it was Kalmár who provided the final proof
+  (which was based on Zermelos original idea). Not only did Kalmár manage
+  to prove that Zalermos statement holds, but he also generalized it to
+  what is known as \emph{Zermelos thorem}. It states that in any
+  sequential game of prefect information and in which no randomness is
+  involved, either the first or the second player has a winning
+  strategy or both players has a strategy guaranteeing at least a
+    draw. \citep{Schwalbe2001} A sequential game is a game where the players takes turn to
+    make a move and the term \emph{perfect information} refers to the
+    fact that both players witness the all draws of the game.\\
+
+    In 1928 John von Neumann published the article \emph{Zur
+      Theorie der Gesellschaftsspiele} where he proved his famous
+    \emph{Minimax theorem} that lay the foundation for the modern
+    field of game theory. In order to understand the result presented
+    in that article it is necessary to understand some basic game
+    theoretical concepts. Therefore, before I present the remarkable
+    work of von Neumann, I will introduce the necessary game theory in
+    Section~\ref{Strategic Games}. 
+  
+\section{Strategic Games}\label{Strategic Games}
+There are several types of games and different representations of
+these games. In this section I will present a type of games called
+simultaneous \emph{strategic games} or \emph{normal-form
+  games}. \textbf{Mention that these types of games are the original
+  types of games}. These games are arguably the simplest types of
+games and the word \emph{simultaneous} refers to the fact that all
+players make their move without knowing the moves of the other
+players. This can be thought of as a game where all players move at
+the same time and the combination of their moves determines their
+individual utility, or \emph{payoff}. In contrast, \emph{sequential
+  games} are games where some players make a move after the other
+players. These games are normally represented as \emph{extensive-form
+  games} and they will not be covered in this section. \\
+
+In order to be able to formally define a strategic game, I
+will first introduce some definitions that are central for the
+theory.
+
+\begin{definition} (Set of Actions) \label{Set of actions}\\
+  Let $P = \{P_1,...,P_n\}$ be a set of players. For $P_i
+  \in P$ we define the \emph{set of actions} $A_i =
+  \{a_{i1},...,a_{im}\}$ as the set of all possible actions available
+  to player $P_i$. 
+  \end{definition}
+
+\begin{definition} (Strategy) \label{Strategy}\\
+  Let $P = \{P_1,...,P_n\}$ be a set of players in a game. For $P_i
+  \in P$ we define a \emph{strategy} $s_i$ as a mapping between each
+  game situation and an element in $A_i$. $S_i$ is the \emph{set of strategies} of player $i$.
+\end{definition}
+
+In Definition~\ref{Set of actions}, an action should be though of as a
+legal move. Definition~\ref{Strategy} is more general than necessary
+when only considering strategic games that are only played once. The
+set of strategies of a player in such games could be considered
+equivalent to the set of actions, However in iterative strategic games
+the distinction between an action and a strategy is important.  
+
+\begin{definition} (Strategy profile) \label{Strategy profile}\\
+  Let $P = \{P_1,...,P_n\}$ be a set of players in a game. A
+  \emph{strategy profile} $s = \{s_1,...,s_n\}$ is a combination of
+  strategies of player $1,...,n$. $S = \prod_{i \in \{1,...,|P|\}}^n
+  S_i $ is the set of all strategy profiles.
+\end{definition}
+
+\begin{definition} (Payoff) \label{Payoff}\\
+  Let $P = \{P_1,...,P_n\}$ a the set of players in a game. The
+  \emph{utility function} of player $i$ is a function $u : S
+  \rightarrow \mathbb{R}$ that maps a every strategy profile $s \in S$
+  to a \emph{payoff} $p \in \mathbb{R}$. $U = \{u_1,...,u_n\}$ is the
+  set of utility functions of player $1,...,n$.
+\end{definition}
+
+Equipped with the definitions above, we are now ready to formally
+define a strategic game.
+
+\begin{definition} (Strategic Game) \label{Strategic Game}\\
+  Let $P = \{P_1,...,P_n\}$ be a set of players with $n \geq 2$. Let
+  $U$ be the set of utility functions of the players and let $S$
+  be the set of all possible strategy profiles. Let $G$ be the triplet
+  $(P,U,S)$. $G$ is an \emph{n-player strategic game}.  
+\end{definition}
+
+
+\section{The Standard Games}
+
+\section{Other Types of Games}
+
+\printbibliography
+
+
+\end{document}
