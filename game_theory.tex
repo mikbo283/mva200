@@ -498,11 +498,82 @@ an equilibrium in the strategy profile $(2,3)$.
     \end{center}
   \end{table}
 
+We have now established that some two player zero-sum games does have
+optimal strategies and that some does not. Does this mean that we
+cannot solve these games? Not at all. Von Neumann did not stop here
+but rather turned his attention to other types of strategies. So far
+we have only considered deterministic strategies, i.e.\ strategies
+that will always choose the same actions in equivalent situations. But
+von Neumann was interested in stochastic strategies, or \emph{mixed
+  strategies}.
+
+\begin{definition}(Mixed strategy)\label{mixed strategy}\\
+  Let $G = (P,U,S)$ be a finite strategic game, i.e.\ a game with $|S|
+  < \infty $. For $i \in \{1,...,|P|\}$ we define $\Sigma_i$ as the set
+  of all possible probability distributions over $S_i$. Let
+  $\Sigma = \prod_{i \in \{1,...,|P| \}} \Sigma_i$. We call an element
+    $\sigma_i \in \Sigma_i$ a \emph{mixed strategy} and
+  an element $\sigma \in \Sigma$ is called a \emph{mixed strategy
+    profile}. \citep{Gonzalez-Diaz2010}
+  \end{definition}
+
+
+  \begin{definition}(Mixed extension)\label{Mixed extension}\\
+Given a finite game $G = (S,U,P)$ we define the \emph{mixed
+  extension} of $G$, denoted $\Gamma(G)$, as the strategic game
+$\Gamma(G) = (\Sigma,\mu,P)$. $\mu$ is the set
+of pay-off functions $\mu_i$ for every player $i$, where $\mu _i(\sigma) \triangleq \mathbb{E}[u_i(\sigma
+  )] =\sum_{s\in S} u_i(s)\sigma_1(s_1) \cdot...\cdot \sigma_n(s_n)$ $\forall
+\sigma \in \Sigma$. \citep{Gonzalez-Diaz2010}\\ 
+\end{definition}
+
+In the mixed extension of a strategic game $G$ we allow for stochastic
+strategies and therefore the payoffs are calculated as
+expectations. This approach is very reasonable in many
+situations. Consider for example once again the game of rock, paper, scissors. It does not seem like a good approach to use a deterministic
+strategy. But does there exist optimal strategies in the mixed
+extension of a two player zero sum game? The answer was given in 1928
+when John von Neumann published his article \emph{Zur Theorie der
+  Gesellschaftsspiele} with his famous \emph{minimax theorem}.
+
+\begin{theorem}(minimax)\\
+Let $G = (P,U,S)$ be a strategic zero-sum game with $|P| = 2$ and $|S|
+< \infty$ and let $\Gamma (G)$ be the mixed extension of $G$. Then
+$\Gamma (G)$ has a value $V$ such that
+\begin{equation}
+  V = max{\sigma _1 \in
+  \Sigma_1} min_{\sigma _2 \in \Sigma_2} \mu_1(\sigma_1,\sigma_2) = min_{\sigma _2 \in
+  \Sigma_2} max_{\sigma _1 \in \Sigma_1} \mu_1(\sigma_1,\sigma_2)
+\end{equation}
+and all mixed strategies $\sigma _1^* \in \Sigma_1$ and $\sigma _2^*
+\in \Sigma_2$ such that
+\begin{equation}
+  \begin{gathered}
+\sigma_1^* = argmax_{\sigma _1 \in
+  \Sigma_1} min_{\sigma _2 \in \Sigma_2} \mu_1(\sigma_1,\sigma_2)\\
+ \sigma_2^* = argmin_{\sigma _2 \in \Sigma_2} max_{\sigma _1 \in
+   \Sigma_1} \mu_1(\sigma_1,\sigma_2)
+\end{gathered}
+\end{equation}
+ are optimal mixed strategies for player $1$ and $2$ respectively.
+\end{theorem}
+
+The publication of the minimax theorem are often considered to be the
+birth of the mathematical field of game theory. However the true
+breakthrough for game theory did not come until 1944 when John von
+Neumann and Oskar Morgenstern published their book \emph{Theory of
+  Games and Economic Behavior} which contained the minimax theorem
+with a different proof, their utility theory
+(which was briefly discussed earlier) and a formalization
+of many game theoretical concepts. It was this book that triggered the
+game theoretical hype that started a few years after its
+publication.
 \section{The Standard Games}
 
 \section{Other Types of Games}
 
 \newpage
+
 \printbibliography
 
 
