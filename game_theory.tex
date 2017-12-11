@@ -84,7 +84,8 @@
 
 
 
-\title{The Early History of Game Theory}
+\title{The Early History of Game Theory\\
+  \large From Rousseau to Nash}
 \author{Mikael Böörs}
 \affil{University of Gothenburg}
 \date{December 2017}
@@ -109,12 +110,16 @@ action that they expect will lead to the subjectively best possible
 outcome based on the information available. The fact that the outcome
 does not depend on any single agent separates the field of game theory
 from the simpler field of decision theory which is the mathematical
-study of the optimal decision-making for a single agent. 
+study of the optimal decision-making for a single agent.\\
 
-\begin{itemize}
-    \item Difference between game theory and decision theory
-    \item Examples of fields 
-\end{itemize}
+The applications of game theory are wide and diverse. It has come to
+play an important role in economics where it for example is used for
+modeling markets, but it is also used in other fields such as
+philosophy, political sciences, military, biology and computer
+science. \citep{Maschler} The many applications have motivated great
+minds to dedicate time to advance the field of game theory and in this
+article I will provide an overview over its early history and
+fundamental results.
 
 \section{The History of Game Theory}\label{The History of Game Theory}
 
@@ -134,7 +139,7 @@ and \emph{God does not exist}. An individual has two choices:
 in god and god exists the outcome will be endless happiness and if god
 does not exist the loss will be finite. If one does not believe in god
 and god exists the result will be eternal suffering, while the result
-will be finite happiness if god does not exist. The problem can be
+will be finite happiness if god does not exist. \citep{sep-pascal-wager} The problem can be
 represented in a \emph{game matrix} as illustrated in Table~\ref{Pascal}.  
 
 
@@ -157,8 +162,8 @@ represented in a \emph{game matrix} as illustrated in Table~\ref{Pascal}.
 Pascal argued that the expected happiness from believing in god was
 infinite while the expected outcome from not doing so was infinite
 suffering. Pascal's Wager has been the subject of much criticism, both
-from mathematicians and philosophers \textbf{Some of the critisism
-  will be mentioned in Section X}. Strictly speaking, Pascal's Wager is not a
+from mathematicians and philosophers. Some of the criticism
+  will be mentioned in Section~\ref{Strategic Games}. Strictly speaking, Pascal's Wager is not a
 game theoretical problem since there is only one player and therefore it
 belongs to the field of decision theory. However the problem is a good
 example of an early attempt to analyse decision making. Another
@@ -168,7 +173,7 @@ this day, is the famous game of \emph{Stag Hunt}. Stag Hunt was
 formulated by Jean-Jacques Rousseau (1712-1778) as a morality problem
 of social cooperation and the problem was formulated as a story of two
 hunters (in some versions there are several hunters but the addition
-of more players does not add anything interesting in this case). The
+of more players does not add anything interesting in this case). \citep{sep-game-ethics} The
 two hunters sets out on a hunt and they can choose to hunt either stag
 or hare. There are plenty of hares so the hunters are confident that
 they can kill one on their own. However there are not as many stags
@@ -202,8 +207,8 @@ represented in a game matrix as illustrated in Table~\ref{Stag hunt 1}.\\
 \end{table}
 
 In contrast to Pascal's Wager, there is no obvious choice of action in
-this game, but \textbf{we will analyze it further in section X when we
-  have introduced the necessary game theoretical tools}.\\
+this game, but we will analyze it further in Section~\ref{Strategic Games} when we
+  have introduced the necessary game theoretical tools.\\
 
 Both of the examples above are examples of game theoretical
 problems. However the first known strict solution to a game theoretical
@@ -212,9 +217,7 @@ in 1713 \citep{Fillion2015}. Waldegrave provided a minimax solution to
 the card game \emph{le Her}. The game is quite complex and I
 will not describe it here. Instead I refer the interested reader to
 the article by \cite{Fillion2015}. However a minimax strategy is a
-\mtodo{This is wrong.}
-strategy that minimizes the maximum loss in a game and maximizes the
-minimum gain. This concept was studied in detail in 1928 by John von
+strategy that minimizes the maximum loss in a game. This concept was studied in detail in 1928 by John von
 Neumann who lay the foundation for the modern field of game theory.\\
 
 In 1913 the German mathematician Ernst Zermelo (1971-1953) published
@@ -259,8 +262,7 @@ that in the game of chess, on of the three statements holds:
 There are several types of games and different representations of
 these games. In this section I will present a type of games called
 simultaneous \emph{strategic games} or \emph{normal-form
-  games}. \textbf{Mention that these types of games are the original
-  types of games}. The word \emph{simultaneous} refers to the fact that all
+  games}. The word \emph{simultaneous} refers to the fact that all
 players make their move without knowing the moves of the other
 players. This can be thought of as a game where all players move at
 the same time and the combination of their moves determines their
@@ -364,6 +366,11 @@ m_2$ bi-matrix as illustrated in Table~\ref{bi-matrix}.\\
     \label{bi-matrix}
     \end{center}
   \end{table}
+
+\emph{Remark: }Some of the criticism that has been directed towards Pascals Wager
+discussed in Section~\ref{The History of Game Theory} concerns the
+definition of payoffs, that does not allow for infinitely large
+rewards.\\
 
 Let us return to the game \emph{Stag Hunt} again, but this time we can
 use von Neumann-Morgenstern utility theory to generalize the game to
@@ -724,7 +731,7 @@ extensions of games. I will now present Nash remarkable result from 1950.
   \emph{Brouwer's fixed point theorem}.\\
 
   As we have already seen the von Neumanns minimax theorem guarantees
-  the existence of a equilibrium in the mixed extension of finite two
+  the existence of an equilibrium in the mixed extension of finite two
   player zero-sum games. It turns out that in the case of these types
   of games NE and von Neumanns equilibria are equivalent and hence
   Nash's theorem is a generalization of the minimax theorem. The true
@@ -734,10 +741,13 @@ extensions of games. I will now present Nash remarkable result from 1950.
   were published over sixty years ago. John Nash was rewarded with the
   Swedish National Bank's Prize in Economic Sciences in Memory of
   Alfred Nobel (not to be confused with a real Nobel Prize!) in 1994
-  together with the game theorists Reinhard Selten and John Harsanyi
-
-  
-\section{Other Types of Games}
+  together with the game theorists Reinhard Selten (1930-2016) and
+  John Harsanyi (1920-2000) who's contributions, although great, will
+  not be covered in this article. I have tried my hardest to cover the
+  early history of game theory. I have neglected the work of several
+  game theorists that were active during this time, but I have done my
+  best to provide an overview of the results and minds that formed the
+  mathematical field that is known as game theory. 
 
 \newpage
 
