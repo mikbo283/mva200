@@ -255,7 +255,7 @@ that in the game of chess, on of the three statements holds:
     work of von Neumann, I will introduce the necessary game theory in
     Section~\ref{Strategic Games}. 
   
-\section{Strategic Games}\label{Strategic Games}
+\section{Strategic Games and the Minimax Theorem}\label{Strategic Games}
 There are several types of games and different representations of
 these games. In this section I will present a type of games called
 simultaneous \emph{strategic games} or \emph{normal-form
@@ -558,6 +558,51 @@ and all mixed strategies $\sigma _1^* \in \Sigma_1$ and $\sigma _2^*
  are optimal mixed strategies for player $1$ and $2$ respectively.
 \end{theorem}
 
+What implications does the minimax theorem have? It guarantees the
+existence of optimal strategies in the mixed extension of every finite
+$m\times n$ zero-sum game. Since the players does not want to defect
+from an optimal strategy, this means that every such game has at least
+one equilibrium. The theorem also provides a method of finding the
+optimal strategies as an optimization problem. This means that we now
+can solve any $m\times n$ game if we consider stochastic strategies. We
+saw earlier that the game of rock, paper, scissors does not have any
+optimal pure strategies. The minimax theorem implies that there exists
+optimal mixed strategies for that game, so let us find them!\\
+
+The minimax theorem states that we should find $\sigma_1^* = argmax_{\sigma _1 \in
+  \Sigma_1} min_{\sigma _2 \in \Sigma_2} \mu_1(\sigma_1,\sigma_2)$. We
+begin by finding $\mu_1(\sigma_1,s_2)$ for $s \in
+\{R,P,S\}$. $\sigma_1$ is a general mixed strategy that chooses $R$
+with probability $x$, $P$ with probability $y$ and $S$ with
+probability $(1-x-y)$, where $x,y \in [0,1]$ and $x+y \leq 1$. This means
+that $$\mu_1(\sigma_1, s_2) = \begin{cases}
+         x+2y-1, & \text{for } s_2 =  R\\
+        1-2x-y, & \text{for } s_2 =  P\\
+        x-y, & \text{for } s_2 =  S
+      \end{cases},$$
+In this case we have that $\mu_1(\sigma_1, R) =  \mu_1(\sigma_1,
+P) = \mu_1(\sigma_1, S)$ exactly when $x = y = \frac{1}{3}$. Since
+all three functions are planes, the maxmin solution is clearly in
+their intersection if it exists (which it does). This becomes obvious
+when looking at the plot in Figure~\ref{value r p s} which illustrates
+the three planes. This means that the
+optimal strategy for player $1$ is to play rock, paper and scissors
+with equal probability. In a similar manner we find that the same is
+true for player $2$ and the value $V$ of the game is given by
+$\mu_1([\frac{1}{3},\frac{1}{3},\frac{1}{3}],[\frac{1}{3},\frac{1}{3},\frac{1}{3}])
+= 0$. This means that player 1 can guarantee himself at most payoff zero in
+expectation and the same is true for player 2.
+
+\begin{figure}[h!]
+  \begin{center}
+\includegraphics[width = 7cm]{rps.png}
+\end{center}
+\caption{The functions $\mu_1(\sigma_1, R),  \mu_1(\sigma_1,
+P) and \mu_1(\sigma_1, S)$. The maxmin solution is clearly obtained
+exactly when $\mu_1(\sigma_1, R) =  \mu_1(\sigma_1,
+P) = \mu_1(\sigma_1, S)$.}
+\label{value r p s}
+\end{figure}
 The publication of the minimax theorem are often considered to be the
 birth of the mathematical field of game theory. However the true
 breakthrough for game theory did not come until 1944 when John von
@@ -568,8 +613,130 @@ with a different proof, their utility theory
 of many game theoretical concepts. It was this book that triggered the
 game theoretical hype that started a few years after its
 publication.
-\section{The Standard Games}
+\section{Nash Equilibria and the Standard Games}
 
+It is impossible to summarize the history of game theory without
+mentioning John Forbes Nash (1928-2015). Just like von Neumann, Nash
+was a mathematician who contributed with great mathematical insights
+in many fields of mathematics. His work in game theory concerned that
+of equilibria. Von Neumann and Morgenstern had already done some
+progress on the subject as we saw in Section~\ref{Strategic
+  Games}. Their work was limited to two person zero-sum games, but
+Nash generalized the theory of equilibria to include all $n-player$
+(non-cooperative) games.\\
+
+Before I introduce the concept of Nash equilibra, I will first present
+a famous game called \emph{Prisoners Dilemma}. The game was introduced
+by the mathematicians Merrill Flood (1908 – 1991) and Melvin Dresher
+(1911-1992) in 1950 who were interested in the applications of game
+theory, especially applications regarding nuclear
+strategies. \citep{sep-prisoner-dilemma} The game is usually
+introduced as a short story that goes as follows. Two prisoners are
+accused of a serious crime. However, there is only enough evidence to condemn
+them for a minor offence and not enough evidence to condemn them for
+the serious crime. Therefore the police tries to barging with
+them. They are faced with an individual choice. They can choose to
+either remain silent (cooperate) or to snitch (defect) on the other
+prisoner. If both cooperates, they will face a short prison prison
+sentence for the minor crime. If both defect, they will face a long time in prison for
+the serious crime. If one of them cooperates and the other one defects,
+the prisoner who defects will go free and the prisoner who cooperates
+will face an even longer prison sentence. The game is illustrated in
+Table~\ref{Prisoners Dilemma}.\\
+
+\begin{table}[h!]
+  \centering
+  \setlength{\extrarowheight}{2pt}
+  \begin{tabular}{cc|c|c|}
+    & \multicolumn{1}{c}{} & \multicolumn{2}{c}{Player 2}\\
+    & \multicolumn{1}{c}{} & \multicolumn{1}{c}{Cooperate}  &
+                                                              \multicolumn{1}{c}{Defect}
+    \\\cline{3-4}
+    \multirow{2}*{Player 1}  & Cooperate & (-1, -1) &
+                                                                   (-3,0) \\\cline{3-4}
+    & Defect & (0, -3) & (-2,-2) \\\cline{3-4}
+  \end{tabular}
+  \caption{Prisoners Dilemma}
+  \label{Prisoners Dilemma}
+\end{table}
+
+Of course the objectively best outcome for the prisoners is the one
+where both cooperates. However, a rational player would reason that the
+best action to take given that the other player defects is to defect, and
+that the best action to take given that the other player cooperates is
+to defect. Defecting is therefore a \emph{dominant strategy} and the
+result will undoubtedly be that both players defect. This means that
+the prisoners will face a longer prison sentence than necessary. In
+fact, the outcome where both players defect is a \emph{Nash
+  Equilibrium}. Intuitively, a Nash equilibrium, abbreviated NE, is a
+strategy profile such that none of the player has an incentive to
+change strategy, given that no other player changes strategy
+first. This is clearly the case in prisoners dilemma. Before I provide
+a strict definition of NE, I will first introduce a new notation.
+
+\begin{definition}(Notation $S_{-i}, s_{-i}$)\label{Notation S-i}\\
+Given a game with set of strategies $S$ we define $S_{-i}$ as $S_{-i} \triangleq
+\prod_{j \in P \setminus \{i\}} S_j$, for a strategy profile $s \in
+S$, we define $(s_{-i},s^*_i)$ as the strategy profile
+$(s_1,...,s_{i-1},s^*_i,s_{i+1},...,s_n) \in S$
+\citep{Gonzalez-Diaz2010}.
+\end{definition}
+
+\begin{definition}(Nash Equilibrium)\label{NE}\\
+  Given a game $G = (P,U,S)$ with $|S| < \infty$, we say that $s^* \in S$ is a
+  \emph{Nash Equilibrium} if $\forall i \in
+  \{1,...,|P|\} \text{ and }\forall s_i \in S_i$ $$ u_i(s^*) \geq u_i(s_i,s_{-i}^*).$$ 
+\end{definition}
+
+Does every finite strategic games have a NE? To find the answer to
+this question we
+does not have to look far. Consider once again the game of rock,
+paper, scissors in Table~\ref{Rock Paper Scissors}. It is clear that
+in every strategy profile one of the players has an incentive to
+change strategy. This implies that the game does not have a NE. We
+have already seen that Prisoners dilemma does have a NE, but can a
+game have more than one NE? The answer is yes. Consider Stag Hunt in
+Table~\ref{Stag Hunt 2}. The strategy profiles $(0,1)$ and $(1,0)$ are
+clearly not NE since since player $1$ has an incentive to change
+strategy in the $(0,1)$ case and player $2$ has an incentive to change
+strategy in the $(1,0)$ case. However both $(0,0)$ and $(1,1)$ are NE
+since neither player can benefit from changing strategy if the other
+player does not change strategy first. Therefore, if two rational
+agents play the game iteratively, both will end up hunting either stag
+or hare at the same time.\\
+
+Prisoners Dilemma and Stag Hunt are examples of \emph{symmetric
+  games}, meaning that the game matrix of player $2$ is the transpose of
+the game matrix of player $1$. All such games have at least one
+NE. \citep{cheng2004notes}. However, just as in the case of the
+minimax theorem, things changes when we turn our gaze to the mixed
+extensions of games. I will now present Nash remarkable result from 1950.
+
+\begin{theorem}(Nash's theorem)
+  Let $G = (P,U,S)$ be a strategic game with $|P|,|S| < \infty$ and
+  let $\Gamma(G)$ be the mixed extension of $G$. $\Gamma(G)$ has at
+  least one Nash Equilibrium. \citep{Maschler}
+  \end{theorem}
+
+  I will not provide a proof of Nash theorem since it requires a lot
+  of ink. However a central part of the proof is to show that the
+  $\Sigma$ and $\mu$ in $\Gamma(G)$ satisfies the conditions in
+  \emph{Brouwer's fixed point theorem}.\\
+
+  As we have already seen the von Neumanns minimax theorem guarantees
+  the existence of a equilibrium in the mixed extension of finite two
+  player zero-sum games. It turns out that in the case of these types
+  of games NE and von Neumanns equilibria are equivalent and hence
+  Nash's theorem is a generalization of the minimax theorem. The true
+  value of Nash's theorem is that it provides a result that is
+  applicable to a wide variety of games and his contributions have had
+  a huge impact on the field of game theory and economics since they
+  were published over sixty years ago. John Nash was rewarded with the
+  Swedish National Bank's Prize in Economic Sciences in Memory of
+  Alfred Nobel (not to be confused with a real Nobel Prize!) in 1994
+  together with the game theorists Reinhard Selten and John Harsanyi
+
+  
 \section{Other Types of Games}
 
 \newpage
