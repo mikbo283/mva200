@@ -96,6 +96,7 @@ The mathematical field of game theory is young:
 \emph{Stag Hunt} is a game theoretical problem formulated by Jean-Jacques Rousseau (1712-1778) as a morality problem
 of social cooperation.
 
+
 \begin{table}
   \centering
   \setlength{\extrarowheight}{2pt}
@@ -103,11 +104,10 @@ of social cooperation.
   \begin{tabular}{cc|c|c|}
     & \multicolumn{1}{c}{} & \multicolumn{2}{c}{Hunter 2}\\
     & \multicolumn{1}{c}{} & \multicolumn{1}{c}{Stag}  & \multicolumn{1}{c}{Hare} \\\cline{3-4}
-\multirow{2}*{Hunter 1}  & Stag & (A lot of food, A lot of food) & (A small amount of food, No food) \\\cline{3-4}
-    & Hare & (No food, A small amount of food) & (A small amount of food, A small amount of food) \\\cline{3-4}
+\multirow{2}*{Hunter 1}  & Stag & (A lot of food, A lot of food) & (No food,A small amount of food) \\\cline{3-4}
+    & Hare & (A small amount of food,No food) & (A small amount of food, A small amount of food) \\\cline{3-4}
   \end{tabular}}
 \end{table}
-
 
 \end{frame}
 
@@ -116,7 +116,7 @@ of social cooperation.
 \frametitle{The History of Game Theory}
 
 \begin{itemize}
-\item In 1713 the armature matheamtician Francis (?) Waldegrave found the optimal strategy in the card game \emph{le Her}.
+\item In 1713 the armature mathematician Francis (?) Waldegrave found the optimal strategy in the card game \emph{le Her}.
   \item In 1913 the German mathematician Ernst Zermelo  published
 the first theorem that can be considered a game theoretical
 theorem. The theorem that states that in the game of chess, one of the following statements hold:
@@ -136,7 +136,7 @@ In 1928 John von Neumann published the article \emph{Zur
 
 \begin{frame}
   
-\frametitle{Strategic Games}
+\frametitle{Strategic Games and the Minimax Theorem}
 
 \begin{table}
   \centering
@@ -145,8 +145,8 @@ In 1928 John von Neumann published the article \emph{Zur
   \begin{tabular}{cc|c|c|}
     & \multicolumn{1}{c}{} & \multicolumn{2}{c}{Hunter 2}\\
     & \multicolumn{1}{c}{} & \multicolumn{1}{c}{Stag}  & \multicolumn{1}{c}{Hare} \\\cline{3-4}
-\multirow{2}*{Hunter 1}  & Stag & (A lot of food, A lot of food) & (A small amount of food, No food) \\\cline{3-4}
-    & Hare & (No food, A small amount of food) & (A small amount of food, A small amount of food) \\\cline{3-4}
+\multirow{2}*{Hunter 1}  & Stag & (A lot of food, A lot of food) & (No food,A small amount of food) \\\cline{3-4}
+    & Hare & (A small amount of food,No food) & (A small amount of food, A small amount of food) \\\cline{3-4}
   \end{tabular}}
 
   \begin{tikzpicture}
@@ -176,7 +176,7 @@ In 1928 John von Neumann published the article \emph{Zur
 
 \begin{frame}
   
-  \frametitle{Strategic Games}
+  \frametitle{Strategic Games and the Minimax Theorem}
 
   Zero-sum games
 
@@ -200,9 +200,9 @@ Are there any optimal strategies?
 
 \begin{frame}
   
-\frametitle{Strategic Games}
+\frametitle{Strategic Games and the Minimax Theorem}
 
-\begin{theorem}(Minimax)\\
+\begin{theorem}[Minimax]
 Let $G = (P,U,S)$ be a strategic zero-sum game with $|P| = 2$ and $|S|
 < \infty$ and let $\Gamma (G)$ be the mixed extension of $G$. Then
 $\Gamma (G)$ has a value $V$ such that
@@ -228,8 +228,87 @@ and all mixed strategies $\sigma _1^* \in \Sigma_1$ and $\sigma _2^*
 
 \begin{frame}
   
-\frametitle{Strategic Games}
+  \frametitle{Strategic Games and the Minimax Theorem}
+\begin{center}
+  \includegraphics[width = 7cm]{solving-zero-sum-games-and-the-minimax-theorem__1.jpg}
+\end{center}
+\end{frame}
 
+
+\begin{frame}
+  
+  \frametitle{Equilibria and John Nash}
+
+  
+\emph{Prisoners Dilemma}: The game was introduced
+by the mathematicians Merrill Flood (1908 – 1991) and Melvin Dresher
+(1911-1992) in 1950 who were interested in the applications of game
+theory, especially applications regarding nuclear
+strategies.
+
+\begin{table}[h!]
+  \centering
+  \setlength{\extrarowheight}{2pt}
+  \begin{tabular}{cc|c|c|}
+    & \multicolumn{1}{c}{} & \multicolumn{2}{c}{Player 2}\\
+    & \multicolumn{1}{c}{} & \multicolumn{1}{c}{Cooperate}  &
+                                                              \multicolumn{1}{c}{Defect}
+    \\\cline{3-4}
+    \multirow{2}*{Player 1}  & Cooperate & (-1, -1) &
+                                                                   (-3,0) \\\cline{3-4}
+    & Defect & (0, -3) & (-2,-2) \\\cline{3-4}
+  \end{tabular}
+\end{table}
+
+
+\end{frame}
+
+
+\begin{frame}
+  
+\frametitle{Equilibria and John Nash}
+
+
+In 1950 John Forbes Nash (1928-2015) introduced the concept of
+  \emph{Nash Equilibria}.
+
+Intuitively, a Nash equilibrium, is a
+strategy profile such that none of the player has an incentive to
+change strategy. Formally:
+
+\begin{definition}[Nash Equilibrium]
+  Given a game $G = (P,U,S)$ with $|S| < \infty$, we say that $s^* \in S$ is a
+  \emph{Nash Equilibrium} if $\forall i \in
+  \{1,...,|P|\} \text{ and }\forall s_i \in S_i$ $$ u_i(s^*) \geq u_i(s_i,s_{-i}^*).$$ 
+\end{definition}
+
+
+\end{frame}
+
+
+\begin{frame}
+  
+\frametitle{Equilibria and John Nash}
+
+\begin{theorem}[Nash's theorem]
+  Let $G = (P,U,S)$ be a strategic game with $|P|,|S| < \infty$ and
+  let $\Gamma(G)$ be the mixed extension of $G$. $\Gamma(G)$ has at
+  least one Nash Equilibrium. 
+  \end{theorem}\\~\\
+
+This theorem was published in 1950 and earned Nash the
+  Swedish National Bank's Prize in Economic Sciences in Memory of
+  Alfred Nobel (not to be confused with a real Nobel Prize!) in 1994.
+  
+\end{frame}
+
+
+\begin{frame}
+  
+  \begin{center}
+    \Huge The End
+  \end{center}
+  
 \end{frame}
 
 
